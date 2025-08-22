@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daniel’s Media Explorer — API Docs</title>
+<style>
+  body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:0;background:#0f1223;color:#e9ecf5}
+  header,footer{padding:16px 20px;border-bottom:1px solid #262b52}
+  main{max-width:900px;margin:0 auto;padding:24px}
+  code,pre{background:#12162a;color:#d5e1ff;border:1px solid #24284a;border-radius:8px;padding:12px;display:block;overflow:auto}
+  h1{font-size:1.3rem} a{color:#a7c4ff}
+  .endpoint{border-left:4px solid #6ea8fe;padding-left:12px;margin:18px 0}
+  .method{display:inline-block;background:#6ea8fe;color:#0b0f24;padding:2px 8px;border-radius:999px;margin-right:8px;font-weight:700}
+  .get{background:#6ea8fe}.post{background:#22c55e}
+</style>
+</head>
+<body>
+<header><h1>Daniel’s Media Explorer — API</h1></header>
+<main>
+  <p>Public JSON API backed by Gun.js. Base URL: <code>https://your-domain.tld</code></p>
+
+  <div class="endpoint">
+    <span class="method get">GET</span><code>/api/search?query=cat&type=image&category=&orientation=&safesearch=true&per_page=24</code>
+    <p>Fetches from upstream, stores normalized media into Gun, indexes under <code>query</code>, and returns items.</p>
+    <pre>{
+  "ok": true,
+  "count": 24,
+  "query": "cat",
+  "type": "image",
+  "items": [ { "id":"123", "type":"image", "src":"...", "thumb":"...", "tags":["cat","animal"], ... } ]
+}</pre>
+  </div>
+
+  <div class="endpoint">
+    <span class="method get">GET</span><code>/api/feed?query=cat&limit=50</code>
+    <p>Returns items already stored in your Gun DB for the query key.</p>
+  </div>
+
+  <div class="endpoint">
+    <span class="method get">GET</span><code>/api/media?id=123</code>
+    <p>Returns one item including live counters (likes, downloads).</p>
+  </div>
+
+  <div class="endpoint">
+    <span class="method post">POST</span><code>/api/like</code>
+    <p>Body: <code>{"id":"123","uid":"user-uuid"}</code> — increments global like counter once per <code>uid</code>.</p>
+  </div>
+
+  <div class="endpoint">
+    <span class="method post">POST</span><code>/api/unlike</code>
+    <p>Body: <code>{"id":"123","uid":"user-uuid"}</code> — removes prior like and decrements counter.</p>
+  </div>
+
+  <div class="endpoint">
+    <span class="method post">POST</span><code>/api/download</code>
+    <p>Body: <code>{"id":"123"}</code> — increments global download counter.</p>
+  </div>
+
+  <h2>Quick usage</h2>
+  <p><b>curl</b></p>
+  <pre>curl "https://your-domain.tld/api/feed?query=cat"</pre>
+
+  <p><b>JavaScript</b></p>
+  <pre>const res = await fetch("/api/feed?query=cat"); const data = await res.json(); console.log(data.items);</pre>
+
+  <h2>Notes</h2>
+  <ul>
+    <li>Use <code>/api/search</code> first to populate the database for a query.</li>
+    <li>Then <code>/api/feed</code> returns media from your Gun.</li>
+    <li>Counters are global and update in realtime via Gun.</li>
+  </ul>
+</main>
+<footer>© 2025 Daniel Effiong</footer>
+</body>
+</html>

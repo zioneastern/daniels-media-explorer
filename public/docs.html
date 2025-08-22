@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel's Media Explorer - API Docs</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; background: #f9f9f9; color: #333; }
+    h1 { color: #e91e63; }
+    code { background: #eee; padding: 2px 5px; border-radius: 4px; }
+    pre { background: #eee; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    a { color: #e91e63; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    section { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Daniel's Media Explorer - API Docs</h1>
+
+  <section>
+    <h2>Search Images & Videos</h2>
+    <p>Endpoint to search media stored in your Gun database:</p>
+    <pre><code>GET /api/search?query=KEYWORD&type=image|video&limit=24</code></pre>
+    <p>Example:</p>
+    <pre><code>GET /api/search?query=nature&type=image&limit=24</code></pre>
+  </section>
+
+  <section>
+    <h2>Feed</h2>
+    <p>Get latest media stored in your Gun database:</p>
+    <pre><code>GET /api/feed?query=KEYWORD&limit=60</code></pre>
+  </section>
+
+  <section>
+    <h2>How It Works</h2>
+    <p>This app fetches media from Pixabay, stores it in Gun (your personal backend), and lets users search, like, and download media directly from your app.</p>
+  </section>
+
+  <section>
+    <h2>Notes</h2>
+    <ul>
+      <li>All media stored in Gun for personal API usage.</li>
+      <li>Users access your API, not Pixabay directly.</li>
+      <li>You can customize further with likes, downloads, and tags.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Daniel Effiong</p>
+  </footer>
+</body>
+</html>

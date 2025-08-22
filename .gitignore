@@ -1,0 +1,18 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Node.js stuff (only if you use npm/yarn)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build/Cache
+dist/
+build/
+.cache/
+
+# Env files
+.env
+.env.local
